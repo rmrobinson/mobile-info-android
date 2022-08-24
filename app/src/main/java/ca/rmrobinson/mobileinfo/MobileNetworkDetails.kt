@@ -11,23 +11,23 @@ import android.telephony.SignalStrength
  *  - FEATURE_TELEPHONY_RADIO_ACCESS
  *  - FEATURE_TELEPHONY_SUBSCRIPTION
  */
-data class MobileNetworkState(
+data class MobileNetworkDetails(
     // Requires READ_PHONE_STATE
     val voiceNetworkType: Int,
-    val isRoaming: Boolean,
+    var isRoaming: Boolean,
     // Requires READ_PHONE_STATE
-    val dataNetworkType: Int,
-    val dataState: Int,
+    var dataNetworkType: Int,
+    var dataState: Int,
     // Requires READ_PHONE_STATE
     val equivalentHomePLMNs: List<String>,
     // Requires READ_PHONE_STATE
     val forbiddenPLMNs: Array<String>,
     // Requires READ_PHONE_STATE
     val groupIdLevel1: String?,
-    val countryIso: String,
-    val operator: String,
-    val operatorName: String,
+    var countryIso: String,
+    var operator: String,
+    var operatorName: String,
     // Requires READ_PHONE_STATE
-    val serviceState: ServiceState?,
+    var serviceState: ServiceState?,
     val signalStrength: SignalStrength?,
 )

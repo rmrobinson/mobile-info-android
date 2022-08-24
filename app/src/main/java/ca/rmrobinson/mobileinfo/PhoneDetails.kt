@@ -7,7 +7,7 @@ package ca.rmrobinson.mobileinfo
  *  - FEATURE_TELEPHONY_GSM
  *  - FEATURE_TELEPHONY_RADIO_ACCESS
  */
-data class PhoneState (
+data class PhoneDetails (
     val deviceSoftwareVersion: String?,
     val hasIccCard: Boolean,
     val supportedModemCount: Int,
@@ -15,7 +15,7 @@ data class PhoneState (
     val tac: String?,
     val isDataCapable: Boolean,
     val isDataConnectionAllowed: Boolean,
-    val isDataEnabled: Boolean,
+    var isDataEnabled: Boolean,
     val isDataRoamingEnabled: Boolean,
     val isMultiSIMSupported: Int,
     val isVoiceCapable: Boolean,

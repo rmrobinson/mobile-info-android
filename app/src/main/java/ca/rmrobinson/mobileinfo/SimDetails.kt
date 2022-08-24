@@ -6,8 +6,8 @@ package ca.rmrobinson.mobileinfo
  * Requires the device have:
  *  - FEATURE_TELEPHONY_SUBSCRIPTION
  */
-data class SIMState (
-    val state: Int,
+data class SimDetails(
+    var state: Int,
     val carrierId: Int,
     val carrierIdName: String,
     val countryIso: String,

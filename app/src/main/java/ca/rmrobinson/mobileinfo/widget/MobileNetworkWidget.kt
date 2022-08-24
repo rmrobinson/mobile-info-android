@@ -69,7 +69,9 @@ fun MobileInfoWidgetBase(
     content: @Composable () -> Unit
 ) {
     Box(
-        modifier = appWidgetBackgroundModifier().then(GlanceModifier.clickable(actionStartActivity<ca.rmrobinson.mobileinfo.MainActivity>())).then(modifier),
+        modifier = appWidgetBackgroundModifier().then(
+            GlanceModifier.clickable(
+                actionStartActivity<ca.rmrobinson.mobileinfo.MainActivity>())).then(modifier),
         contentAlignment = Alignment.Center,
         content = content,
     )
@@ -88,7 +90,8 @@ fun MobilePermissionsRequiredCard() {
 fun MobileInfoWidgetCard(state: MobileInfo) {
     var operatorName = "-"
     var operator = "-"
-    if (state.radioState == ServiceState.STATE_IN_SERVICE || state.radioState == ServiceState.STATE_EMERGENCY_ONLY) {
+    if (state.radioState == ServiceState.STATE_IN_SERVICE ||
+        state.radioState == ServiceState.STATE_EMERGENCY_ONLY) {
         operatorName = carrierNameFromMCCMNC(state.operator)
         operator = state.operator
 

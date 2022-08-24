@@ -1,5 +1,6 @@
 package ca.rmrobinson.mobileinfo
 
+import android.net.NetworkCapabilities.*
 import android.telephony.ServiceState
 import android.telephony.TelephonyManager
 import androidx.compose.runtime.Composable
@@ -9,7 +10,8 @@ import androidx.compose.ui.res.stringResource
  * A helper to convert an MCC MNC pair into a presentable string. This can be used
  * if the network operator name may be obscured by the SIM.
  *
- * The contents for this function were sourced from https://en.wikipedia.org/wiki/Mobile_network_codes_in_ITU_region_3xx_(North_America)
+ * The contents for this function were sourced from
+ * https://en.wikipedia.org/wiki/Mobile_network_codes_in_ITU_region_3xx_(North_America)
  *
  * @param mccmnc The pair of Mobile Country Code (MCC) and Mobile Network Code (MNC) to resolve
  * @return The brand operating this MCCMNC pair; or an empty string if none was found
@@ -306,4 +308,64 @@ fun networkTypeToString(networkType: Int): String {
         TelephonyManager.NETWORK_TYPE_UMTS -> stringResource(R.string.network_umts)
         else -> stringResource(R.string.network_unknown)
     }
+}
+
+@Composable
+fun networkAvailabilityToString(availability: IpNetworkAvailability): String {
+    return when (availability) {
+        IpNetworkAvailability.AVAILABLE -> stringResource(R.string.network_availability_available)
+        IpNetworkAvailability.LOSING -> stringResource(R.string.network_availability_losing)
+        IpNetworkAvailability.LOST -> stringResource(R.string.network_availability_lost)
+        IpNetworkAvailability.UNAVAILABLE -> stringResource(R.string.network_availability_unavailable)
+    }
+}
+
+@Composable
+fun boolToString(v: Boolean): String {
+    return if (v) {
+        stringResource(R.string.boolean_label_positive)
+    } else {
+        stringResource(R.string.boolean_label_negative)
+    }
+}
+
+@Composable
+fun netCapabilitiesToString(capabilities: IntArray): String {
+    var capabilitiesStr = ""
+
+    for (capability in capabilities) {
+        if (!capabilitiesStr.isEmpty()) {
+            capabilitiesStr += ", "
+        }
+
+        capabilitiesStr += when (capability) {
+            NET_CAPABILITY_CAPTIVE_PORTAL -> "CaptivePortal"
+            NET_CAPABILITY_CBS -> "Carrier-CBS"
+            NET_CAPABILITY_DUN -> "Carrier-DUN"
+            NET_CAPABILITY_EIMS -> "Carrier-EIMS"
+            NET_CAPABILITY_ENTERPRISE -> "Enterprise"
+            NET_CAPABILITY_FOREGROUND -> "Foreground"
+            NET_CAPABILITY_FOTA -> "Carrier-FOTA"
+            NET_CAPABILITY_HEAD_UNIT -> "HeadUnit"
+            NET_CAPABILITY_IA -> "Carrier-InitialAttach"
+            NET_CAPABILITY_IMS -> "Carrier-IMS"
+            NET_CAPABILITY_INTERNET -> "Internet"
+            NET_CAPABILITY_MCX -> "Carrier-MissionCritical"
+            NET_CAPABILITY_MMS -> "Carrier-MMS"
+            NET_CAPABILITY_NOT_CONGESTED -> "NotCongested"
+            NET_CAPABILITY_NOT_METERED -> "NotMetered"
+            NET_CAPABILITY_NOT_ROAMING -> "NotRoaming"
+            NET_CAPABILITY_NOT_SUSPENDED -> "NotSuspended"
+            NET_CAPABILITY_NOT_VPN -> "NotVPN"
+            NET_CAPABILITY_RCS -> "Carrier-RCS"
+            NET_CAPABILITY_TEMPORARILY_NOT_METERED -> "TempNotMetered"
+            NET_CAPABILITY_TRUSTED -> "Trusted"
+            NET_CAPABILITY_VALIDATED -> "Validated"
+            NET_CAPABILITY_WIFI_P2P -> "Wifi P2P"
+            NET_CAPABILITY_XCAP -> "Carrier-XCAP"
+            else -> "Unknown"
+        }
+    }
+
+    return capabilitiesStr
 }
